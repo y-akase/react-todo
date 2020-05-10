@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../stores';
-import { completeTodo } from '../../stores/todo';
+import { completeTodo, deleteTodo } from '../../stores/todo';
 
 export default function Todos() {
   const todoList = useSelector((state: RootState) => state.todo);
@@ -20,6 +20,7 @@ export default function Todos() {
             checked={todo.isComplete}
           />
           {todo.title}
+          <button onClick={() => dispatch(deleteTodo(todo.id))}>削除</button>
         </li>
       ))}
     </ul>
