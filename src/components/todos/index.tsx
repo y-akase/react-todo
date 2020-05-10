@@ -1,13 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../stores';
+import { completeTodo } from '../../stores/todo';
 
 export default function Todos() {
   const todoList = useSelector((state: RootState) => state.todo);
+
+  const dispatch = useDispatch();
+
   return (
     <ul>
       {todoList.todos.map((todo) => (
-        <li>{todo.todo}</li>
+        <li>
+          <input
+            type="checkbox"
+            name={todo.id.toString()}
+            id={todo.id.toString()}
+            onClick={() => dispatch(completeTodo(todo.id))}
+            checked={todo.isComplete}
+          />
+          {todo.title}
+        </li>
       ))}
     </ul>
   );
