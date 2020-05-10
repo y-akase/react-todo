@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Todo {
   id: number;
-  todo: string;
+  title: string;
   isComplete: boolean;
 }
 
@@ -23,14 +23,24 @@ const slice = createSlice({
     addTodo: (state: TodoList, action: PayloadAction<string>) => {
       state.todos.push({
         id: state.count,
-        todo: action.payload,
+        title: action.payload,
         isComplete: false,
       });
       state.count++;
+    },
+    completeTodo: (state: TodoList, action: PayloadAction<number>) => {
+      const todo = state.todos.find((s) => s.id === action.payload);
+      if (todo) {
+        todo.isComplete = !todo.isComplete;
+      }
+    },
+    deleteTodo: (state: TodoList, action: PayloadAction<number>) => {
+      const newTodo = state.todos.filter((x) => x.id !== action.payload);
+      state.todos = newTodo;
     },
   },
 });
 
 export default slice.reducer;
 
-export const { addTodo } = slice.actions;
+export const { addTodo, completeTodo, deleteTodo } = slice.actions;
