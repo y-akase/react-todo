@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../stores';
 
-export default function Tasks() {
+export default function Todos() {
   const todoList = useSelector((state: RootState) => state.todo);
   return (
     <ul>
