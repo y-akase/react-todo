@@ -1,17 +1,17 @@
 import React from 'react';
-import styles from './App.module.scss';
 import AddField from './components/add-field';
 import Todos from './components/todos';
+import { Box } from '@material-ui/core';
 
 interface IPropsApp {}
 interface IStateApp {}
 export default class App extends React.Component<IPropsApp, IStateApp> {
   render() {
     return (
-      <div className={styles.App}>
+      <Box textAlign="center">
         <AddField />
         <Todos />
-      </div>
+      </Box>
     );
   }
 }

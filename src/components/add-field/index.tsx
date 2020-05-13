@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../stores/todo';
 import {
+  Box,
   InputLabel,
   Input,
   FormControl,
@@ -26,7 +27,7 @@ export default function AddField() {
   };
 
   return (
-    <div>
+    <Box>
       <form onSubmit={handleSubmit}>
         <FormControl>
           <InputLabel htmlFor="input-with-icon-adornment">
@@ -47,6 +48,6 @@ export default function AddField() {
           />
         </FormControl>
       </form>
-    </div>
+    </Box>
   );
 }
