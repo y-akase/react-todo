@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../stores/todo';
+import { Button } from '@material-ui/core';
 
 export default function AddField() {
   const dispatch = useDispatch();
@@ -11,17 +12,25 @@ export default function AddField() {
     setInputTitle(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(addTodo(inputTitle));
     setInputTitle('');
   };
 
   return (
     <div>
-      <input type="text" value={inputTitle} onChange={handleInputChange} />
-      <button onClick={handleSubmit} disabled={inputTitle === ''}>
-        追加
-      </button>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={inputTitle} onChange={handleInputChange} />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={inputTitle === ''}
+        >
+          追加
+        </Button>
+      </form>
     </div>
   );
 }
