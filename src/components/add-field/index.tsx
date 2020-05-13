@@ -35,7 +35,6 @@ export default function AddField() {
           </InputLabel>
           <Input
             id="input-with-icon-adornment"
-            type="input"
             value={inputTitle}
             onChange={handleInputChange}
             endAdornment={
