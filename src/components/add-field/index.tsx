@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../stores/todo';
-import { Button } from '@material-ui/core';
+import {
+  Button,
+  TextField,
+  InputLabel,
+  Input,
+  InputAdornment,
+  FormControl,
+  IconButton,
+} from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function AddField() {
   const dispatch = useDispatch();
@@ -21,15 +30,22 @@ export default function AddField() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={inputTitle} onChange={handleInputChange} />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          disabled={inputTitle === ''}
-        >
-          追加
-        </Button>
+        <FormControl>
+          <InputLabel htmlFor="input-with-icon-adornment">
+            ToDoを入力
+          </InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            type="input"
+            value={inputTitle}
+            onChange={handleInputChange}
+            endAdornment={
+              <IconButton type="submit" disabled={inputTitle === ''}>
+                <AddCircleIcon />
+              </IconButton>
+            }
+          />
+        </FormControl>
       </form>
     </div>
   );
