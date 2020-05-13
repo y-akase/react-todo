@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../stores/todo';
-import {
-  Button,
-  TextField,
-  InputLabel,
-  Input,
-  InputAdornment,
-  FormControl,
-  IconButton,
-} from '@material-ui/core';
+import { InputLabel, Input, FormControl, IconButton } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function AddField() {
