@@ -29,7 +29,7 @@ export default function AddField() {
   return (
     <Box>
       <form onSubmit={handleSubmit}>
-        <FormControl>
+        <FormControl fullWidth>
           <InputLabel htmlFor="input-with-icon-adornment">
             ToDoを入力
           </InputLabel>
