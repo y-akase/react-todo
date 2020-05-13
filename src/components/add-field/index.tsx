@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../stores/todo';
-import { InputLabel, Input, FormControl, IconButton } from '@material-ui/core';
+import {
+  InputLabel,
+  Input,
+  FormControl,
+  IconButton,
+  InputAdornment,
+} from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function AddField() {
@@ -32,9 +38,11 @@ export default function AddField() {
             value={inputTitle}
             onChange={handleInputChange}
             endAdornment={
-              <IconButton type="submit" disabled={inputTitle === ''}>
-                <AddCircleIcon />
-              </IconButton>
+              <InputAdornment position="end">
+                <IconButton type="submit" disabled={inputTitle === ''}>
+                  <AddCircleIcon />
+                </IconButton>
+              </InputAdornment>
             }
           />
         </FormControl>
