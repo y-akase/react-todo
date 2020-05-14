@@ -5,15 +5,12 @@ import { completeTodo, deleteTodo } from '../../stores/todo';
 import {
   List,
   ListItem,
-  ListItemAvatar,
   Checkbox,
-  Avatar,
   ListItemText,
   ListItemSecondaryAction,
   IconButton,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CreateIcon from '@material-ui/icons/Create';
 
 export default function Todos() {
   const todoList = useSelector((state: RootState) => state.todo);
@@ -21,21 +18,19 @@ export default function Todos() {
   const dispatch = useDispatch();
 
   return (
-    <List dense={false}>
+    <List>
       {todoList.todos.map((todo) => (
-        <ListItem key={todo.id}>
-          <ListItemAvatar>
-            <Avatar>
-              <CreateIcon />
-            </Avatar>
-          </ListItemAvatar>
+        <ListItem
+          key={todo.id}
+          button
+          onClick={() => dispatch(completeTodo(todo.id))}
+        >
           <Checkbox
             name={todo.id.toString()}
             id={todo.id.toString()}
-            onClick={() => dispatch(completeTodo(todo.id))}
-            defaultChecked={todo.isComplete}
+            checked={todo.isComplete}
           />
-          <ListItemText primary={todo.title}></ListItemText>
+          <ListItemText primary={todo.title} />
           <ListItemSecondaryAction>
             <IconButton
               aria-label="delete"
