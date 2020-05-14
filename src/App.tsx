@@ -1,4 +1,5 @@
 import React from 'react';
+import ShowButtons from './components/show-tabs';
 import AddField from './components/add-field';
 import Todos from './components/todos';
 import { Box, Container } from '@material-ui/core';
@@ -10,6 +11,7 @@ export default class App extends React.Component<IPropsApp, IStateApp> {
     return (
       <Container maxWidth="sm">
         <Box textAlign="center">
+          <ShowButtons />
           <AddField />
           <Todos />
         </Box>
