@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../stores';
-import { completeTodo, deleteTodo } from '../../stores/todo';
+import { ShowMode, completeTodo, deleteTodo } from '../../stores/todo';
 import {
   List,
   ListItem,
@@ -19,28 +19,34 @@ export default function Todos() {
 
   return (
     <List>
-      {todoList.todos.map((todo) => (
-        <ListItem
-          key={todo.id}
-          button
-          onClick={() => dispatch(completeTodo(todo.id))}
-        >
-          <Checkbox
-            name={todo.id.toString()}
-            id={todo.id.toString()}
-            checked={todo.isComplete}
-          />
-          <ListItemText primary={todo.title} />
-          <ListItemSecondaryAction>
-            <IconButton
-              aria-label="delete"
-              onClick={() => dispatch(deleteTodo(todo.id))}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-      ))}
+      {todoList.todos
+        .filter((x) => {
+          if (todoList.mode === ShowMode.All) return true;
+          if (todoList.mode === ShowMode.Incomplete) return x.isComplete;
+          if (todoList.mode === ShowMode.Completed) return !x.isComplete;
+        })
+        .map((todo) => (
+          <ListItem
+            key={todo.id}
+            button
+            onClick={() => dispatch(completeTodo(todo.id))}
+          >
+            <Checkbox
+              name={todo.id.toString()}
+              id={todo.id.toString()}
+              checked={todo.isComplete}
+            />
+            <ListItemText primary={todo.title} />
+            <ListItemSecondaryAction>
+              <IconButton
+                aria-label="delete"
+                onClick={() => dispatch(deleteTodo(todo.id))}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+        ))}
     </List>
   );
 }

@@ -1,17 +1,21 @@
 import React from 'react';
+import { RootState } from '../../stores';
+import { ShowMode, setMode } from '../../stores/todo';
 import { Paper, Tabs, Tab } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function ShowTabs() {
-  const [value, setValue] = React.useState(0);
+  const dispatch = useDispatch();
+  const mode = useSelector((state: RootState) => state.todo.mode);
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+  const handleChange = (event: React.ChangeEvent<{}>, newMode: ShowMode) => {
+    dispatch(setMode(newMode));
   };
 
   return (
     <Paper square>
       <Tabs
-        value={value}
+        value={mode}
         indicatorColor="primary"
         textColor="primary"
         variant="fullWidth"
