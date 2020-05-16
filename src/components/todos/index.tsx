@@ -22,8 +22,8 @@ export default function Todos() {
       {todoList.todos
         .filter((x) => {
           if (todoList.mode === ShowMode.All) return true;
-          if (todoList.mode === ShowMode.Incomplete) return x.isComplete;
-          if (todoList.mode === ShowMode.Completed) return !x.isComplete;
+          if (todoList.mode === ShowMode.Incomplete) return !x.isComplete;
+          if (todoList.mode === ShowMode.Completed) return x.isComplete;
           return true;
         })
         .map((todo) => (
