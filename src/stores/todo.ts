@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export enum ShowMode {
+  All,
+  Incomplete,
+  Completed,
+}
+
 interface Todo {
   id: number;
   title: string;
@@ -8,11 +14,13 @@ interface Todo {
 
 interface TodoList {
   count: number;
+  mode: ShowMode;
   todos: Todo[];
 }
 
 const initialState: TodoList = {
   count: 0,
+  mode: ShowMode.All,
   todos: [],
 };
 
@@ -38,9 +46,12 @@ const slice = createSlice({
       const newTodo = state.todos.filter((x) => x.id !== action.payload);
       state.todos = newTodo;
     },
+    setMode: (state: TodoList, action: PayloadAction<ShowMode>) => {
+      state.mode = action.payload;
+    },
   },
 });
 
 export default slice.reducer;
 
-export const { addTodo, completeTodo, deleteTodo } = slice.actions;
+export const { addTodo, completeTodo, deleteTodo, setMode } = slice.actions;

@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../../stores/todo';
+import {
+  Box,
+  InputLabel,
+  Input,
+  FormControl,
+  IconButton,
+  InputAdornment,
+} from '@material-ui/core';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 export default function AddField() {
   const dispatch = useDispatch();
@@ -11,17 +20,33 @@ export default function AddField() {
     setInputTitle(e.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(addTodo(inputTitle));
     setInputTitle('');
   };
 
   return (
-    <div>
-      <input type="text" value={inputTitle} onChange={handleInputChange} />
-      <button onClick={handleSubmit} disabled={inputTitle === ''}>
-        追加
-      </button>
-    </div>
+    <Box>
+      <form onSubmit={handleSubmit}>
+        <FormControl fullWidth>
+          <InputLabel htmlFor="input-with-icon-adornment">
+            ToDoを入力
+          </InputLabel>
+          <Input
+            id="input-with-icon-adornment"
+            value={inputTitle}
+            onChange={handleInputChange}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton type="submit" disabled={inputTitle === ''}>
+                  <AddCircleIcon />
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
+      </form>
+    </Box>
   );
 }

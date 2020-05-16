@@ -1,17 +1,21 @@
 import React from 'react';
-import styles from './App.module.scss';
+import ShowButtons from './components/show-tabs';
 import AddField from './components/add-field';
 import Todos from './components/todos';
+import { Box, Container } from '@material-ui/core';
 
 interface IPropsApp {}
 interface IStateApp {}
 export default class App extends React.Component<IPropsApp, IStateApp> {
   render() {
     return (
-      <div className={styles.App}>
-        <AddField />
-        <Todos />
-      </div>
+      <Container maxWidth="sm">
+        <Box textAlign="center">
+          <ShowButtons />
+          <AddField />
+          <Todos />
+        </Box>
+      </Container>
     );
   }
 }
